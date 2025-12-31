@@ -6,31 +6,7 @@
         <meta name="theme-color" content="#0b5cff">
         <meta name="description" content="Attività e supporto AGASI per Collège e Lycée della Sezione Italiana.">
         <title>Collège &amp; Lycée — Attività della Sezione Italiana</title>
-        <script>
-            (function () {
-                try {
-                    var key = 'theme-preference';
-                    var theme = null;
-                    try {
-                        var ls = localStorage.getItem(key);
-                        if (ls === 'dark' || ls === 'light') theme = ls;
-                    } catch (e) {}
-                    if (!theme && document.cookie) {
-                        var m = /(?:^|;)\s*theme=([^;]+)/.exec(document.cookie);
-                        if (m && (m[1] === 'dark' || m[1] === 'light')) theme = m[1];
-                    }
-                    if (!theme && window.name) {
-                        var nm = /theme=(dark|light)/.exec(window.name);
-                        if (nm) theme = nm[1];
-                    }
-                    if (!theme) {
-                        theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-                    }
-                    document.documentElement.setAttribute('data-theme', theme);
-                } catch (e) {}
-            })();
-        </script>
-        <link rel="stylesheet" href="assets/styles.css">
+        <link rel="stylesheet" href="assets/styles.css?v=2">
     </head>
     <body>
         <a class="skip-link" href="#content">Salta al contenuto</a>
@@ -41,9 +17,6 @@
                     <span class="brand-mark" aria-hidden="true">AGASI</span>
                     <span class="brand-text">AgasiFerney</span>
                 </a>
-                <button class="theme-toggle" type="button" aria-label="Cambia tema" aria-pressed="false">
-                    <span class="theme-icon" aria-hidden="true">🌞</span>
-                </button>
                 <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Apri menu">
                     <span class="nav-toggle-bar"></span>
                     <span class="nav-toggle-bar"></span>
