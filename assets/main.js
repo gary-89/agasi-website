@@ -2,6 +2,25 @@
 (function () {
     const doc = document;
 
+    // Client-side includes (fetch and inject partials)
+    async function loadClientIncludes() {
+        const includeNodes = Array.from(doc.querySelectorAll('[data-include]'));
+        if (includeNodes.length === 0) return false;
+        await Promise.all(includeNodes.map(async (el) => {
+            const url = el.getAttribute('data-include');
+            if (!url) return;
+            try {
+                const res = await fetch(url, { headers: { 'X-Requested-With': 'fetch' } });
+                if (!res.ok) return;
+                const html = await res.text();
+                const tpl = doc.createElement('template');
+                tpl.innerHTML = html.trim();
+                el.replaceWith(tpl.content.cloneNode(true));
+            } catch {}
+        }));
+        return true;
+    }
+
     // Parallax for hero background image (lightweight, only on homepage hero)
     function setupHeroParallax() {
         const hero = doc.querySelector('.hero');
@@ -29,13 +48,19 @@
     }
 
     // Current year in footer
-    const yearEl = doc.getElementById('year');
-    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    function updateYear() {
+        const yearEl = doc.getElementById('year');
+        if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    }
+    updateYear();
 
     // Mobile nav toggle
-    const navToggle = doc.querySelector('.nav-toggle');
-    const siteNav = doc.getElementById('site-nav');
-    if (navToggle && siteNav) {
+    function initNavToggle() {
+        const navToggle = doc.querySelector('.nav-toggle');
+        const siteNav = doc.getElementById('site-nav');
+        if (!(navToggle && siteNav)) return;
+        if (navToggle.dataset.bound === '1') return;
+        navToggle.dataset.bound = '1';
         const toggle = () => {
             const open = siteNav.classList.toggle('open');
             navToggle.setAttribute('aria-expanded', String(open));
@@ -53,6 +78,7 @@
             navToggle.classList.remove('is-open');
         });
     }
+    initNavToggle();
 
     // Progressive-enhanced navigation: intercept internal links to .html pages
     const supportsHistory = 'pushState' in window.history && 'replaceState' in window.history;    
@@ -72,6 +98,13 @@
 
     // Initialize behaviors on first load
     setupHeroParallax();
+    // Load includes, then re-init bits that depend on them
+    loadClientIncludes().then((loaded) => {
+        if (!loaded) return;
+        updateYear();
+        initNavToggle();
+        setActiveNav(window.location.pathname);
+    });
 
     if (supportsHistory) {
         // Initialize active state

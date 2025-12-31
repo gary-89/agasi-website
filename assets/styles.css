@@ -77,8 +77,22 @@ body {
     z-index: 100;
     backdrop-filter: saturate(180%) blur(8px);
     background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, transparent), var(--bg));
-    border-bottom: 1px solid var(--border);
+    border-bottom: 0;
     transition: background 180ms ease, border-color 180ms ease;
+}
+.site-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px; /* Italian flag stripe */
+    background: linear-gradient(90deg,
+        #008C45 0%, #008C45 33.333%,
+        #F4F5F0 33.333%, #F4F5F0 66.666%,
+        #CD212A 66.666%, #CD212A 100%
+    );
+    pointer-events: none;
 }
 .header-inner {
     display: flex;
@@ -299,7 +313,7 @@ body {
     border-radius: 7px;
     border: none;
     background: var(--bg);
-    color: var(--text);
+    color: var(--text) !important;
     text-decoration: none;
 }
 .button:hover {
@@ -308,7 +322,7 @@ body {
 }
 .button-primary {
     background: var(--brand);
-    color: white;
+    color: white !important;
 }
 .button-primary:hover {
     background: color-mix(in srgb, var(--brand) 85%, white 15%);
@@ -432,11 +446,7 @@ a:visited:hover {
     color: inherit;
     text-decoration: none;
 }
-.button,
-.button:visited {
+.button {
     color: inherit;
     text-decoration: none;
-}
-.button-primary:visited {
-    color: white;
 }
