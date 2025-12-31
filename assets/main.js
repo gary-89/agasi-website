@@ -2,6 +2,67 @@
 (function () {
     const doc = document;
 
+    // THEME toggle and persistence
+    const THEME_KEY = 'theme-preference';
+    const setCookie = (v) => {
+        try { document.cookie = 'theme=' + encodeURIComponent(v) + '; path=/; max-age=31536000'; } catch {}
+    };
+    const getCookie = () => {
+        try {
+            const m = /(?:^|;)\s*theme=([^;]+)/.exec(document.cookie || '');
+            if (m && (m[1] === 'dark' || m[1] === 'light')) return m[1];
+        } catch {}
+        return null;
+    };
+    const setWindowName = (v) => {
+        try {
+            const rest = (window.name || '').replace(/(?:^|;)\s*theme=(dark|light)\b/, '').trim();
+            window.name = 'theme=' + v + (rest ? ';' + rest : '');
+        } catch {}
+    };
+    const getWindowName = () => {
+        try {
+            const m = /theme=(dark|light)/.exec(window.name || '');
+            return m ? m[1] : null;
+        } catch { return null; }
+    };
+    const getStoredTheme = () => {
+        try {
+            const ls = localStorage.getItem(THEME_KEY);
+            if (ls === 'dark' || ls === 'light') return ls;
+        } catch {}
+        const c = getCookie();
+        if (c) return c;
+        const wn = getWindowName();
+        if (wn) return wn;
+        return null;
+    };
+    const storeTheme = (v) => {
+        try { localStorage.setItem(THEME_KEY, v); } catch {}
+        setCookie(v);
+        setWindowName(v);
+    };
+    const systemPrefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const resolveInitialTheme = () => getStoredTheme() || (systemPrefersDark() ? 'dark' : 'light');
+    const applyTheme = (theme) => {
+        const root = doc.documentElement;
+        root.setAttribute('data-theme', theme);
+        const toggle = doc.querySelector('.theme-toggle');
+        const icon = toggle && toggle.querySelector('.theme-icon');
+        if (toggle) toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        if (icon) icon.textContent = theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+    };
+    applyTheme(resolveInitialTheme());
+    const themeToggleBtn = doc.querySelector('.theme-toggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const current = doc.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+            storeTheme(next);
+        });
+    }
+
     // Current year in footer
     const yearEl = doc.getElementById('year');
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
