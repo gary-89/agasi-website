@@ -31,7 +31,7 @@ body {
     --bg-elev: #f6f8fb;
     --text: #0e1116;
     --muted: #5b6270;
-    --brand: #0b5cff;
+    --brand: #06c;
     --brand-ink: #0a3fcc;
     --border: #a8a8a8;
     --ring: 0 0 0 3px rgba(11,92,255,0.25);
@@ -86,7 +86,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 4px; /* Italian flag stripe */
+    height: 6px; /* Italian flag stripe */
     background: linear-gradient(90deg,
         #008C45 0%, #008C45 33.333%,
         #F4F5F0 33.333%, #F4F5F0 66.666%,
@@ -307,6 +307,33 @@ body {
     flex-wrap: wrap;
 }
 
+/* Page header hero (non-home pages) */
+.page-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 44px 0 54px;
+    /* Left-to-right gradient with an Italian green-tinted left third */
+    background: #008C45;
+    background: linear-gradient(90deg,rgba(0, 140, 69, 0.5) 50%, rgba(0, 140, 69, 0.42) 100%);
+}
+.page-hero .container {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+}
+.page-hero h1 {
+    margin: 0;
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.15;
+    color: var(--bg);
+    font-weight: 500;
+}
+.page-hero .subtitle {
+    margin: 10px 0 0;
+    color: var(--bg);
+    opacity: 0.8;
+    font-size: clamp(15px, 2.2vw, 18px);
+}
 .button {
     display: inline-block;
     padding: 10px 14px;
@@ -355,15 +382,16 @@ body {
     display: grid;
     align-content: start;
     gap: 8px;
-    min-height: 180px;
 }
 .card h2 {
     margin: 2px 0 6px;
     font-size: 18px;
 }
-.card p {
-    margin: 0 0 8px;
+article.card p {
     color: var(--muted);
+}
+.card p{
+    margin: 0 0 8px;
 }
 .card-link {
     margin-top: auto;
@@ -425,6 +453,11 @@ body {
 /* Content layout defaults */
 .site-main {
     outline: none;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.home-page.site-main {
+    margin-top: 0;
 }
 
 /* Global links */
