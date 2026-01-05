@@ -28,16 +28,22 @@ body {
 
 :root {
     --bg: #ffffff;
-    --bg-elev: #f6f8fb;
-    --text: #0e1116;
-    --muted: #5b6270;
-    --brand: #06c;
-    --brand-ink: #0a3fcc;
-    --border: #a8a8a8;
-    --ring: 0 0 0 3px rgba(11,92,255,0.25);
-    --link: #1f6feb;
-    --link-hover: #1158c7;
-    --link-visited: #6f42c1;
+    --bg-elev: #f7f9fc;
+    --text: #1a1f2e;
+    --muted: #5d6470;
+    --brand: #0066cc;
+    --brand-ink: #004c99;
+    --brand-light: #e6f2ff;
+    --italian-green: #008C45;
+    --italian-red: #CD212A;
+    --border: #d0d7de;
+    --ring: 0 0 0 3px rgba(0, 102, 204, 0.2);
+    --link: #0969da;
+    --link-hover: #0550ae;
+    --link-visited: #8250df;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .text-center {
@@ -465,6 +471,7 @@ a {
     color: var(--link);
     text-decoration: underline;
     text-underline-offset: 2px;
+    transition: color 180ms ease;
 }
 a:visited {
     color: var(--link-visited);
@@ -482,4 +489,116 @@ a:visited:hover {
 .button {
     color: inherit;
     text-decoration: none;
+}
+
+/* Enhanced blockquote styling */
+blockquote {
+    margin: 32px 0;
+    padding: 20px 24px;
+    border-left: 4px solid var(--brand);
+    background: var(--bg-elev);
+    border-radius: 0 8px 8px 0;
+}
+blockquote p {
+    margin: 0;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.05em;
+}
+
+/* Banking card styling */
+.card-banking {
+    background: linear-gradient(135deg, var(--bg-elev) 0%, color-mix(in srgb, var(--brand) 5%, var(--bg-elev)) 100%);
+    border: 1px solid var(--border);
+}
+.card-banking p {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+}
+
+/* Enhanced card hover effect */
+.card {
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+}
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border);
+}
+
+/* Content page improvements */
+.site-main h2 {
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1.5em;
+    border-bottom: 2px solid var(--bg-elev);
+    padding-bottom: 8px;
+}
+.site-main h2:first-child {
+    margin-top: 0;
+}
+.site-main ul {
+    line-height: 1.7;
+    margin: 16px 0;
+}
+.site-main ul li {
+    margin-bottom: 8px;
+}
+.site-main p {
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+/* Focus states for accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Button enhancements */
+.button {
+    transition: all 200ms ease;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+}
+.button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+.button-primary {
+    border-color: var(--brand-ink);
+}
+.button-primary:hover {
+    border-color: var(--brand-ink);
+}
+
+/* News page article cards */
+.site-main article.card {
+    margin-bottom: 24px;
+}
+.site-main article.card:last-child {
+    margin-bottom: 0;
+}
+.site-main article.card h2 {
+    margin-top: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    color: var(--brand);
+}
+
+/* Contact page card spacing */
+.site-main .card + h2 {
+    margin-top: 48px;
 }
