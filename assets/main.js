@@ -96,6 +96,25 @@
         });
     };
 
+    // Apply seasonal effect to page-hero
+    function applySeasonalEffect() {
+        const pageHero = doc.querySelector('.page-hero');
+        if (!pageHero) return;
+
+        const month = new Date().getMonth(); // 0 = January, 11 = December
+        // Winter: November (10), December (11), January (0), February (1)
+        const isWinter = month === 10 || month === 11 || month === 0 || month === 1;
+
+        if (isWinter) {
+            pageHero.classList.add('season-winter');
+            pageHero.classList.remove('season-other');
+        } else {
+            pageHero.classList.add('season-other');
+            pageHero.classList.remove('season-winter');
+        }
+    }
+    applySeasonalEffect();
+
     // Initialize behaviors on first load
     setupHeroParallax();
     // Load includes, then re-init bits that depend on them

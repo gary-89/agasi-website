@@ -338,15 +338,86 @@ body {
 .page-hero::after {
     content: "";
     position: absolute;
-    bottom: -2px;
+    top: 0;
     left: 0;
     right: 0;
-    height: 120px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C100,62 200,62 300,70 C400,78 500,78 600,70 C700,62 800,62 900,70 C1000,78 1100,78 1200,70 L1200,120 L0,120 Z' fill='%23ffffff' opacity='0.25'/%3E%3Cpath d='M0,80 C100,72 200,72 300,80 C400,88 500,88 600,80 C700,72 800,72 900,80 C1000,88 1100,88 1200,80 L1200,120 L0,120 Z' fill='%23ffffff' opacity='0.45'/%3E%3Cpath d='M0,88 C100,80 200,80 300,88 C400,96 500,96 600,88 C700,80 800,80 900,88 C1000,96 1100,96 1200,88 L1200,120 L0,120 Z' fill='%23ffffff'/%3E%3C/svg%3E");
-    background-size: 1200px 120px;
-    background-repeat: repeat-x;
-    background-position: 0 bottom;
-    animation: wave 60s linear infinite;
+    bottom: 0;
+    pointer-events: none;
+}
+
+/* Winter effect (November - February): Snow particles */
+.page-hero.season-winter::after {
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.35) 2.5px, transparent 2.5px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.25) 1.8px, transparent 1.8px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.3) 2px, transparent 2px);
+    background-size:
+        550px 450px,
+        350px 300px,
+        450px 400px,
+        500px 350px,
+        400px 500px;
+    background-position:
+        0 0,
+        40px 60px,
+        130px 270px,
+        70px 100px,
+        250px 30px;
+    animation: snowfall 40s linear infinite;
+}
+
+/* Other months: Pollen effect */
+.page-hero.season-other::after {
+    background-image:
+        radial-gradient(circle, rgba(255, 220, 100, 0.4) 1.5px, transparent 3px),
+        radial-gradient(circle, rgba(255, 235, 150, 0.35) 1px, transparent 2.5px),
+        radial-gradient(circle, rgba(255, 210, 80, 0.38) 1.2px, transparent 2.8px),
+        radial-gradient(circle, rgba(255, 240, 180, 0.3) 1px, transparent 2.5px),
+        radial-gradient(circle, rgba(255, 225, 120, 0.32) 1.3px, transparent 3px);
+    background-size:
+        450px 400px,
+        350px 300px,
+        500px 350px,
+        400px 450px,
+        380px 380px;
+    background-position:
+        0 0,
+        120px 60px,
+        230px 180px,
+        60px 220px,
+        180px 100px;
+    filter: blur(0.5px);
+    animation: pollenDrift 50s ease-in-out infinite;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 100px);
+    }
+}
+
+@keyframes pollenDrift {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translate(0, 0);
+    }
+    25% {
+        opacity: 0.8;
+        transform: translate(40px, -20px);
+    }
+    50% {
+        opacity: 0.9;
+        transform: translate(80px, 10px);
+    }
+    75% {
+        opacity: 0.7;
+        transform: translate(60px, -10px);
+    }
 }
 .page-hero .container {
     position: relative;
@@ -380,10 +451,6 @@ body {
     66% { transform: translate(-20px, 20px) scale(0.9); }
 }
 
-@keyframes wave {
-    0% { background-position: 0 bottom; }
-    100% { background-position: 1200px bottom; }
-}
 .button {
     display: inline-block;
     padding: 10px 14px;
