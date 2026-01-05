@@ -325,13 +325,14 @@ body {
 .page-hero::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
     background:
-        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 45%);
     animation: float 20s ease-in-out infinite;
 }
 .page-hero::after {
@@ -340,11 +341,12 @@ body {
     bottom: -2px;
     left: 0;
     right: 0;
-    height: 100px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C300,100 600,20 900,60 C1050,80 1150,60 1200,50 L1200,100 L0,100 Z' fill='%23ffffff' opacity='0.3'/%3E%3Cpath d='M0,70 C300,30 600,90 900,50 C1050,35 1150,55 1200,60 L1200,100 L0,100 Z' fill='%23ffffff' opacity='0.5'/%3E%3Cpath d='M0,80 C300,50 600,70 900,65 C1050,62 1150,75 1200,70 L1200,100 L0,100 Z' fill='%23ffffff'/%3E%3C/svg%3E");
-    background-size: cover;
-    background-position: center bottom;
-    animation: wave 12s linear infinite;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,90 400,40 600,60 C800,80 1000,40 1200,60 L1200,60 C1000,40 800,80 600,60 C400,40 200,90 0,60 L1200,120 L0,120 Z' fill='%23ffffff' opacity='0.2'/%3E%3Cpath d='M0,70 C200,40 400,85 600,55 C800,30 1000,75 1200,50 L1200,50 C1000,75 800,30 600,55 C400,85 200,40 0,70 L1200,120 L0,120 Z' fill='%23ffffff' opacity='0.4'/%3E%3Cpath d='M0,80 C200,60 400,70 600,65 C800,60 1000,75 1200,70 L1200,70 C1000,75 800,60 600,65 C400,70 200,60 0,80 L1200,120 L0,120 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-size: 2400px 120px;
+    background-repeat: repeat-x;
+    background-position: 0 bottom;
+    animation: wave 20s linear infinite;
 }
 .page-hero .container {
     position: relative;
@@ -379,8 +381,8 @@ body {
 }
 
 @keyframes wave {
-    0% { background-position-x: 0; }
-    100% { background-position-x: 1200px; }
+    0% { background-position: 0 bottom; }
+    100% { background-position: 2400px bottom; }
 }
 .button {
     display: inline-block;
