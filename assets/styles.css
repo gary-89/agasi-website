@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
 
 /* CSS reset and base */
 *,
@@ -11,7 +11,8 @@ html:focus-within {
     scroll-behavior: smooth;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -21,7 +22,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     line-height: 1.5;
-    font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto,
+        Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     color: var(--text);
     background: var(--bg);
 }
@@ -34,8 +36,8 @@ body {
     --brand: #0066cc;
     --brand-ink: #004c99;
     --brand-light: #e6f2ff;
-    --italian-green: #008C45;
-    --italian-red: #CD212A;
+    --italian-green: #008c45;
+    --italian-red: #cd212a;
     --border: #d0d7de;
     --ring: 0 0 0 3px rgba(0, 102, 204, 0.2);
     --link: #0969da;
@@ -82,7 +84,11 @@ body {
     top: 0;
     z-index: 100;
     backdrop-filter: saturate(180%) blur(8px);
-    background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, transparent), var(--bg));
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 92%, transparent),
+        var(--bg)
+    );
     border-bottom: 0;
     transition: background 180ms ease, border-color 180ms ease;
 }
@@ -93,10 +99,14 @@ body {
     right: 0;
     bottom: 0;
     height: 6px; /* Italian flag stripe */
-    background: linear-gradient(90deg,
-        #008C45 0%, #008C45 33.333%,
-        #F4F5F0 33.333%, #F4F5F0 66.666%,
-        #CD212A 66.666%, #CD212A 100%
+    background: linear-gradient(
+        90deg,
+        #008c45 0%,
+        #008c45 33.333%,
+        #f4f5f0 33.333%,
+        #f4f5f0 66.666%,
+        #cd212a 66.666%,
+        #cd212a 100%
     );
     pointer-events: none;
 }
@@ -141,14 +151,16 @@ body {
     border: 1px solid var(--border);
     background: var(--bg-elev);
     cursor: pointer;
-    transition: background 160ms ease, border-color 160ms ease, transform 120ms ease;
+    transition: background 160ms ease, border-color 160ms ease,
+        transform 120ms ease;
 }
 .nav-toggle-bar {
     width: 22px;
     height: 2px;
     background: var(--text);
     margin: 0 auto;
-    transition: transform 180ms ease, opacity 180ms ease, background-color 160ms ease;
+    transition: transform 180ms ease, opacity 180ms ease,
+        background-color 160ms ease;
 }
 .nav-toggle:focus-visible {
     outline: none;
@@ -214,7 +226,11 @@ body {
     right: 10px;
     bottom: 6px;
     height: 2px;
-    background: linear-gradient(90deg, var(--brand), color-mix(in srgb, var(--brand) 60%, var(--bg)));
+    background: linear-gradient(
+        90deg,
+        var(--brand),
+        color-mix(in srgb, var(--brand) 60%, var(--bg))
+    );
     opacity: 0;
     transition: opacity 180ms ease;
 }
@@ -257,7 +273,11 @@ body {
     min-height: calc(100svh);
     display: grid;
     align-items: center;
-    background: radial-gradient(1200px 400px at 10% -20%, color-mix(in srgb, var(--brand) 10%, transparent), transparent 50%);
+    background: radial-gradient(
+        1200px 400px at 10% -20%,
+        color-mix(in srgb, var(--brand) 10%, transparent),
+        transparent 50%
+    );
 }
 .hero .container {
     position: relative;
@@ -276,8 +296,16 @@ body {
     object-position: 62% 40%;
     opacity: 0.35;
     /* fade edges using mask */
-    -webkit-mask-image: radial-gradient(120% 85% at 62% 45%, #000 75%, transparent 100%);
-    mask-image: radial-gradient(120% 85% at 62% 45%, #000 75%, transparent 100%);
+    -webkit-mask-image: radial-gradient(
+        120% 85% at 62% 45%,
+        #000 75%,
+        transparent 100%
+    );
+    mask-image: radial-gradient(
+        120% 85% at 62% 45%,
+        #000 75%,
+        transparent 100%
+    );
     will-change: transform;
 }
 /* edge blur overlay that blurs only near the edges */
@@ -288,7 +316,11 @@ body {
     pointer-events: none;
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    -webkit-mask-image: radial-gradient(85% 70% at 62% 45%, transparent 60%, #000 100%);
+    -webkit-mask-image: radial-gradient(
+        85% 70% at 62% 45%,
+        transparent 60%,
+        #000 100%
+    );
     mask-image: radial-gradient(85% 70% at 62% 45%, transparent 60%, #000 100%);
 }
 .hero-title {
@@ -318,7 +350,7 @@ body {
     position: relative;
     overflow: hidden;
     padding: 64px 0 74px;
-    background: linear-gradient(135deg, #006bb3 0%, #008C45 50%, #00a86b 100%);
+    background: linear-gradient(135deg, #006bb3 0%, #008c45 50%, #00a86b 100%);
     background-size: 200% 200%;
     animation: gradientShift 15s ease infinite;
 }
@@ -329,10 +361,21 @@ body {
     left: -50%;
     right: -50%;
     bottom: -50%;
-    background:
-        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
-        radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 45%);
+    background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 60% 20%,
+            rgba(255, 255, 255, 0.06) 0%,
+            transparent 45%
+        );
     animation: float 20s ease-in-out infinite;
 }
 .page-hero::after {
@@ -347,47 +390,59 @@ body {
 
 /* Winter effect (November - February): Snow particles */
 .page-hero.season-winter::after {
-    background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
-        radial-gradient(circle, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px),
-        radial-gradient(circle, rgba(255, 255, 255, 0.35) 2.5px, transparent 2.5px),
-        radial-gradient(circle, rgba(255, 255, 255, 0.25) 1.8px, transparent 1.8px),
+    background-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.4) 2px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.3) 1.5px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.35) 2.5px,
+            transparent 2.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.25) 1.8px,
+            transparent 1.8px
+        ),
         radial-gradient(circle, rgba(255, 255, 255, 0.3) 2px, transparent 2px);
-    background-size:
-        550px 450px,
-        350px 300px,
-        450px 400px,
-        500px 350px,
+    background-size: 550px 450px, 350px 300px, 450px 400px, 500px 350px,
         400px 500px;
-    background-position:
-        0 0,
-        40px 60px,
-        130px 270px,
-        70px 100px,
-        250px 30px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px, 250px 30px;
     animation: snowfall 40s linear infinite;
 }
 
 /* Other months: Pollen effect */
 .page-hero.season-other::after {
-    background-image:
-        radial-gradient(circle, rgba(255, 220, 100, 0.4) 1.5px, transparent 3px),
-        radial-gradient(circle, rgba(255, 235, 150, 0.35) 1px, transparent 2.5px),
-        radial-gradient(circle, rgba(255, 210, 80, 0.38) 1.2px, transparent 2.8px),
+    background-image: radial-gradient(
+            circle,
+            rgba(255, 220, 100, 0.4) 1.5px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 235, 150, 0.35) 1px,
+            transparent 2.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 210, 80, 0.38) 1.2px,
+            transparent 2.8px
+        ),
         radial-gradient(circle, rgba(255, 240, 180, 0.3) 1px, transparent 2.5px),
-        radial-gradient(circle, rgba(255, 225, 120, 0.32) 1.3px, transparent 3px);
-    background-size:
-        450px 400px,
-        350px 300px,
-        500px 350px,
-        400px 450px,
+        radial-gradient(
+            circle,
+            rgba(255, 225, 120, 0.32) 1.3px,
+            transparent 3px
+        );
+    background-size: 450px 400px, 350px 300px, 500px 350px, 400px 450px,
         380px 380px;
-    background-position:
-        0 0,
-        120px 60px,
-        230px 180px,
-        60px 220px,
-        180px 100px;
+    background-position: 0 0, 120px 60px, 230px 180px, 60px 220px, 180px 100px;
     filter: blur(0.5px);
     animation: pollenDrift 50s ease-in-out infinite;
 }
@@ -402,7 +457,8 @@ body {
 }
 
 @keyframes pollenDrift {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0.6;
         transform: translate(0, 0);
     }
@@ -441,14 +497,26 @@ body {
 }
 
 @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 @keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -30px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
 }
 
 .button {
@@ -507,7 +575,7 @@ body {
 article.card p {
     color: var(--muted);
 }
-.card p{
+.card p {
     margin: 0 0 8px;
 }
 .card-link {
@@ -533,7 +601,11 @@ article.card p {
 /* Footer */
 .site-footer {
     background: var(--bg-elev);
-    background: linear-gradient(90deg, rgba(230, 231, 232, 1) 0%,rgba(246, 248, 251, 1) 50%);
+    background: linear-gradient(
+        90deg,
+        rgba(230, 231, 232, 1) 0%,
+        rgba(246, 248, 251, 1) 50%
+    );
 }
 .footer-inner {
     padding-top: 18px; /* keep horizontal padding from .container */
@@ -619,11 +691,15 @@ blockquote p {
 
 /* Banking card styling */
 .card-banking {
-    background: linear-gradient(135deg, var(--bg-elev) 0%, color-mix(in srgb, var(--brand) 5%, var(--bg-elev)) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--bg-elev) 0%,
+        color-mix(in srgb, var(--brand) 5%, var(--bg-elev)) 100%
+    );
     border: 1px solid var(--border);
 }
 .card-banking p {
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: 0.95em;
 }
 
