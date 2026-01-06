@@ -587,9 +587,6 @@ article.card p {
     align-items: center;
     gap: 6px;
 }
-.card-link:hover {
-    text-decoration: underline;
-}
 .card-link::after {
     content: "→";
     transition: transform 160ms ease;
@@ -703,21 +700,6 @@ blockquote p {
     font-size: 0.95em;
 }
 
-/* Card styling - no hover effects on non-clickable cards */
-.card {
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border);
-}
-
-/* Hover effects ONLY for clickable cards (homepage cards with links) */
-article.card {
-    transition: transform 200ms ease, box-shadow 200ms ease;
-}
-article.card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
 /* Content page improvements */
 .site-main h2 {
     margin-top: 40px;
@@ -753,19 +735,8 @@ button:focus-visible {
 
 /* Button enhancements */
 .button {
-    transition: all 200ms ease;
+    transition: all 100ms ease;
     font-weight: 500;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid transparent;
-}
-.button:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(0, 0, 0, 0.1);
-}
-.button:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-sm);
 }
 .button-primary {
     border-color: var(--brand-ink);
@@ -778,14 +749,10 @@ button:focus-visible {
 .site-main article.card {
     margin-bottom: 24px;
 }
-.site-main article.card:last-child {
-    margin-bottom: 0;
-}
 .site-main article.card h2 {
     margin-top: 0;
     border-bottom: none;
     padding-bottom: 0;
-    color: var(--brand);
 }
 
 /* Contact page card spacing */
