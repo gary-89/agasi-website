@@ -1,30 +1,16 @@
 (function () {
     const doc = document;
 
-    // Client-side includes (fetch and inject partials)
-    async function loadClientIncludes() {
-        const includeNodes = Array.from(doc.querySelectorAll("[data-include]"));
-        if (includeNodes.length === 0) return false;
-        await Promise.all(
-            includeNodes.map(async (el) => {
-                const url = el.getAttribute("data-include");
-                if (!url) return;
-                try {
-                    const res = await fetch(url, {
-                        headers: { "X-Requested-With": "fetch" },
-                    });
-                    if (!res.ok) return;
-                    const html = await res.text();
-                    const tpl = doc.createElement("template");
-                    tpl.innerHTML = html.trim();
-                    el.replaceWith(tpl.content.cloneNode(true));
-                } catch {}
-            })
-        );
-        return true;
+    async function loadHTML(id, file, callback) {
+        const res = await fetch(file);
+        const text = await res.text();
+        document.getElementById(id).innerHTML = text;
+        if (callback) callback();
     }
 
-    // Parallax for hero background image (lightweight, only on homepage hero)
+    loadHTML("header", "partials/header.html", highlightCurrentPage);
+    loadHTML("footer", "partials/footer.html", showRandomQuote);
+
     function setupHeroParallax() {
         const hero = doc.querySelector(".hero");
         const img = hero && hero.querySelector(".hero-art img");
@@ -37,12 +23,10 @@
             requestAnimationFrame(() => {
                 const rect = hero.getBoundingClientRect();
                 // Only animate while hero is at least partially in viewport
-                const viewportH =
-                    window.innerHeight || doc.documentElement.clientHeight;
+                const viewportH = window.innerHeight || doc.documentElement.clientHeight;
                 if (rect.bottom > 0 && rect.top < viewportH) {
                     const offset = -rect.top * factor;
-                    img.style.transform =
-                        "translateY(" + offset.toFixed(1) + "px)";
+                    img.style.transform = "translateY(" + offset.toFixed(1) + "px)";
                 }
                 ticking = false;
             });
@@ -52,15 +36,14 @@
         window.addEventListener("resize", onScroll);
     }
 
-    // Current year in footer
-    function updateYear() {
+    function updateFooterCurrentYear() {
         const yearEl = doc.getElementById("year");
         if (yearEl) yearEl.textContent = String(new Date().getFullYear());
     }
-    updateYear();
 
-    // Mobile nav toggle
-    function initNavToggle() {
+    updateFooterCurrentYear();
+
+    function initMobileToggleNavigation() {
         const navToggle = doc.querySelector(".nav-toggle");
         const siteNav = doc.getElementById("site-nav");
         if (!(navToggle && siteNav)) return;
@@ -72,25 +55,23 @@
             navToggle.classList.toggle("is-open", open);
         };
         navToggle.addEventListener("click", toggle);
-        // Close on outside click (desktop not needed)
+
         doc.addEventListener("click", (e) => {
             const target = e.target;
             if (!(target instanceof Element)) return;
             if (!siteNav.classList.contains("open")) return;
-            if (target.closest("#site-nav") || target.closest(".nav-toggle"))
-                return;
+            if (target.closest("#site-nav") || target.closest(".nav-toggle")) return;
             siteNav.classList.remove("open");
             navToggle.setAttribute("aria-expanded", "false");
             navToggle.classList.remove("is-open");
         });
     }
-    initNavToggle();
 
-    // Progressive-enhanced navigation: intercept internal links to .html pages
-    const supportsHistory =
-        "pushState" in window.history && "replaceState" in window.history;
+    initMobileToggleNavigation();
 
-    const setActiveNav = (path) => {
+    const supportsHistory = "pushState" in window.history && "replaceState" in window.history;
+
+    const setActiveNavigationMenuItem = (path) => {
         const links = doc.querySelectorAll("nav#site-nav a");
         links.forEach((a) => {
             const href = a.getAttribute("href") || "";
@@ -103,15 +84,13 @@
         });
     };
 
-    // Apply seasonal effect to page-hero
     function applySeasonalEffect() {
         const pageHero = doc.querySelector(".page-hero");
         if (!pageHero) return;
 
         const month = new Date().getMonth();
         // Winter: November (10), December (11), January (0), February (1)
-        const isWinter =
-            month === 10 || month === 11 || month === 0 || month === 1;
+        const isWinter = month === 10 || month === 11 || month === 0 || month === 1;
 
         if (isWinter) {
             pageHero.classList.add("season-winter");
@@ -121,21 +100,51 @@
             pageHero.classList.remove("season-winter");
         }
     }
+
     applySeasonalEffect();
 
-    // Initialize behaviors on first load
     setupHeroParallax();
 
-    // Load includes, then re-init bits that depend on them
-    loadClientIncludes().then((loaded) => {
-        if (!loaded) return;
-        updateYear();
-        initNavToggle();
-        setActiveNav(window.location.pathname);
-    });
-
     if (supportsHistory) {
-        // Initialize active state
-        setActiveNav(window.location.pathname);
+        setActiveNavigationMenuItem(window.location.pathname);
+    }
+
+    function highlightCurrentPage() {
+        let currentPage = location.pathname.split("/").pop();
+
+        if (currentPage === "") {
+            currentPage = "index.html";
+        }
+
+        document.querySelectorAll("nav a").forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+
+            console.log("Comparing", linkPage, "to", currentPage);
+
+            if (linkPage === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    const quotes = [
+        { text: "Una lingua diversa è una diversa visione della vita.", author: "Federico Fellini" },
+        { text: "La cultura è organizzazione, disciplina del proprio io.", author: "Antonio Gramsci" },
+        { text: "Istruitevi, perché avremo bisogno di tutta la vostra intelligenza.", author: "Antonio Gramsci" },
+        { text: "La scuola è il nostro passaporto per il futuro.", author: "Don Lorenzo Milani" },
+        { text: "Sortirne tutti insieme è politica, sortirne da soli è avarizia.", author: "Don Lorenzo Milani" },
+        { text: "La lingua è il più potente strumento di cultura.", author: "Tullio De Mauro" },
+        { text: "La cultura rende liberi.", author: "Tullio De Mauro" },
+        { text: "Ogni parola ha un volto e una storia.", author: "Italo Calvino" },
+        { text: "Prendete la vita con leggerezza.", author: "Italo Calvino" },
+        { text: "La fantasia è un posto dove ci piove dentro.", author: "Italo Calvino" },
+        { text: "Le parole sono tutto quello che abbiamo.", author: "Andrea Camilleri" },
+        { text: "Un classico è un libro che non ha mai finito di dire quel che ha da dire.", author: "Italo Calvino" },
+        { text: "La lingua è la chiave del cuore di un popolo.", author: "Giuseppe Ungaretti" },
+    ];
+
+    function showRandomQuote() {
+        const q = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById("quote-footer-content").innerHTML = `"${q.text}" — <em>${q.author}</em>`;
     }
 })();

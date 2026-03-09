@@ -217,6 +217,9 @@ body {
 .site-nav a:hover {
     color: var(--brand) !important;
 }
+.site-nav a.active {
+    color: var(--brand) !important;
+}
 .site-nav a:focus-visible {
     outline: none;
     box-shadow: var(--ring);
@@ -554,6 +557,7 @@ article.card p {
 .site-footer {
     background: var(--bg-elev);
     background: linear-gradient(90deg, rgba(230, 231, 232, 1) 0%, rgba(246, 248, 251, 1) 50%);
+    padding-top: 20px;
 }
 .footer-inner {
     padding-top: 18px; /* keep horizontal padding from .container */
@@ -578,7 +582,9 @@ article.card p {
 .footer-links a:hover {
     text-decoration: underline;
 }
-
+.quote-footer {
+    text-align: center;
+}
 .noscript {
     margin: 12px auto;
     padding: 10px 12px;
