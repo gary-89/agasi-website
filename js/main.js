@@ -8,7 +8,7 @@
         if (callback) callback();
     }
 
-    loadHTML("header", "partials/header.html", highlightCurrentPage);
+    loadHTML("header", "partials/header.html", setupMenu);
     loadHTML("footer", "partials/footer.html", showRandomQuote);
 
     function setupHeroParallax() {
@@ -108,8 +108,6 @@
     }
 
     function highlightCurrentPage() {
-        initMobileToggleNavigation();
-
         let currentPage = location.pathname.split("/").pop();
 
         if (currentPage === "") {
@@ -125,6 +123,12 @@
                 link.classList.add("active");
             }
         });
+    }
+
+    function setupMenu() {
+        initMobileToggleNavigation();
+        highlightCurrentPage;
+        hideStarredItems();
     }
 
     const quotes = [
@@ -147,4 +151,23 @@
         const q = quotes[Math.floor(Math.random() * quotes.length)];
         document.getElementById("quote-footer-content").innerHTML = `"${q.text}" — <em>${q.author}</em>`;
     }
+
+    function hideStarredItems() {
+        const today = new Date();
+        const month = today.getMonth();
+        const day = today.getDate();
+
+        // Check if today is between March 1 and April 30
+        const isBetween =
+            (month === 2 && day >= 1) || // March (month=2)
+            (month === 3 && day <= 30); // April (month=3)
+
+        if (!isBetween) {
+            document.querySelectorAll(".starred").forEach((el) => {
+                el.style.display = "none";
+            });
+        }
+    }
+
+    hideStarredItems();
 })();
