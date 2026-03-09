@@ -87,6 +87,14 @@ body {
 }
 
 /* Header */
+#header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .site-header {
     position: sticky;
     top: 0;
@@ -94,10 +102,10 @@ body {
     backdrop-filter: saturate(180%) blur(8px);
     background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, transparent), var(--bg));
     border-bottom: 0;
-    transition:
-        background 180ms ease,
-        border-color 180ms ease;
+    transition: background 180ms ease;
+    transition: border-color 180ms ease;
 }
+
 .site-header::after {
     content: "";
     position: absolute;
@@ -108,6 +116,18 @@ body {
     background: linear-gradient(90deg, #008c45 0%, #008c45 33.333%, #f4f5f0 33.333%, #f4f5f0 66.666%, #cd212a 66.666%, #cd212a 100%);
     pointer-events: none;
 }
+
+.site-footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #008c45 0%, #008c45 33.333%, #f4f5f0 33.333%, #f4f5f0 66.666%, #cd212a 66.666%, #cd212a 100%);
+    pointer-events: none;
+}
+
 .header-inner {
     display: flex;
     align-items: center;
@@ -555,10 +575,12 @@ article.card p {
 
 /* Footer */
 .site-footer {
+    position: relative;
     background: var(--bg-elev);
     background: linear-gradient(90deg, rgba(230, 231, 232, 1) 0%, rgba(246, 248, 251, 1) 50%);
     padding-top: 20px;
 }
+
 .footer-inner {
     padding-top: 18px; /* keep horizontal padding from .container */
     padding-bottom: 18px;
