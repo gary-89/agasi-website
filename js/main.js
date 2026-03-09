@@ -67,8 +67,6 @@
         });
     }
 
-    initMobileToggleNavigation();
-
     const supportsHistory = "pushState" in window.history && "replaceState" in window.history;
 
     const setActiveNavigationMenuItem = (path) => {
@@ -110,6 +108,8 @@
     }
 
     function highlightCurrentPage() {
+        initMobileToggleNavigation();
+
         let currentPage = location.pathname.split("/").pop();
 
         if (currentPage === "") {
