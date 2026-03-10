@@ -67,21 +67,6 @@
         });
     }
 
-    const supportsHistory = "pushState" in window.history && "replaceState" in window.history;
-
-    const setActiveNavigationMenuItem = (path) => {
-        const links = doc.querySelectorAll("nav#site-nav a");
-        links.forEach((a) => {
-            const href = a.getAttribute("href") || "";
-            const url = new URL(href, window.location.href);
-            if (url.pathname === path) {
-                a.setAttribute("aria-current", "page");
-            } else {
-                a.removeAttribute("aria-current");
-            }
-        });
-    };
-
     function applySeasonalEffect() {
         const pageHero = doc.querySelector(".page-hero");
         if (!pageHero) return;
@@ -103,10 +88,6 @@
 
     setupHeroParallax();
 
-    if (supportsHistory) {
-        setActiveNavigationMenuItem(window.location.pathname);
-    }
-
     function highlightCurrentPage() {
         let currentPage = location.pathname.split("/").pop();
 
@@ -117,8 +98,6 @@
         document.querySelectorAll("nav a").forEach((link) => {
             const linkPage = link.getAttribute("href").split("/").pop();
 
-            console.log("Comparing", linkPage, "to", currentPage);
-
             if (linkPage === currentPage) {
                 link.classList.add("active");
             }
@@ -127,7 +106,7 @@
 
     function setupMenu() {
         initMobileToggleNavigation();
-        highlightCurrentPage;
+        highlightCurrentPage();
         hideStarredItems();
     }
 
