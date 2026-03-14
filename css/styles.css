@@ -224,7 +224,7 @@ body {
 .site-nav a {
     display: block;
     position: relative;
-    padding: 10px 12px;
+    padding: 10px 8px;
     border-radius: 4px;
     color: var(--text);
     text-decoration: none;
@@ -699,7 +699,16 @@ blockquote p {
 .site-main p {
     line-height: 1.7;
 }
-
+.menu-badge-aperto {
+    background: var(--brand);
+    color: white;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
 /* Focus states for accessibility */
 a:focus-visible,
 button:focus-visible {
